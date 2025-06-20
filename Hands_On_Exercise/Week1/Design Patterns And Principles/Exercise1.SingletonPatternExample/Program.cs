@@ -11,7 +11,6 @@ class Program
         Logger logger2 = Logger.GetInstance();
         logger2.Log("Second message");
 
-        // Check if both logger instances are the same
         if (object.ReferenceEquals(logger1, logger2))
         {
             Console.WriteLine("Both logger instances are the same. Singleton works!");
