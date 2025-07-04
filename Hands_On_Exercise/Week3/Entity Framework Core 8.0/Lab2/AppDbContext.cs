@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 public class AppDbContext : DbContext
 {
@@ -7,7 +7,8 @@ public class AppDbContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseSqlServer("Server=YOUR_SERVER_NAME;Database=RetailDb;" +
-            "Trusted_Connection=True;TrustServerCertificate=True;");
+        optionsBuilder.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;" +
+            "Database=RetailDb;Trusted_Connection=True;TrustServerCertificate=True;");
+
     }
 }
