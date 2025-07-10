@@ -1,15 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 
 namespace YourApp.Controllers
 {
     [ApiController]
-    [Route("api/emp")] // ✅ Modified route to match instruction
+    [Route("api/val")]
     public class ValuesController : ControllerBase
     {
         private static List<string> values = new List<string> { "value1", "value2" };
 
-        // GET: api/emp
+        // GET: api/val
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public ActionResult<IEnumerable<string>> Get()
@@ -17,7 +17,7 @@ namespace YourApp.Controllers
             return Ok(values);
         }
 
-        // GET: api/emp/0
+        // GET: api/val/1
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -28,7 +28,7 @@ namespace YourApp.Controllers
             return Ok(values[id]);
         }
 
-        // POST: api/emp
+        // POST: api/val
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -36,12 +36,11 @@ namespace YourApp.Controllers
         {
             if (string.IsNullOrWhiteSpace(value))
                 return BadRequest("Invalid input.");
-
             values.Add(value);
             return CreatedAtAction(nameof(Get), new { id = values.Count - 1 }, value);
         }
 
-        // PUT: api/emp/0
+        // PUT: api/val/1
         [HttpPut("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -50,15 +49,13 @@ namespace YourApp.Controllers
         {
             if (string.IsNullOrWhiteSpace(newValue))
                 return BadRequest("Invalid input.");
-
             if (id < 0 || id >= values.Count)
                 return NotFound("Value not found.");
-
             values[id] = newValue;
             return NoContent();
         }
 
-        // DELETE: api/emp/0
+        // DELETE: api/val/1
         [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -66,7 +63,6 @@ namespace YourApp.Controllers
         {
             if (id < 0 || id >= values.Count)
                 return NotFound("Value not found.");
-
             values.RemoveAt(id);
             return NoContent();
         }
