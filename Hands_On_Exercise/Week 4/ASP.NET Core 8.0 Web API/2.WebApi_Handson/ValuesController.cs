@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace YourApp.Controllers
 {
     [ApiController]
-    [Route("api/val")]
+    [Route("api/val")]// Custom route for Postman testing
     public class ValuesController : ControllerBase
     {
         private static List<string> values = new List<string> { "value1", "value2" };
