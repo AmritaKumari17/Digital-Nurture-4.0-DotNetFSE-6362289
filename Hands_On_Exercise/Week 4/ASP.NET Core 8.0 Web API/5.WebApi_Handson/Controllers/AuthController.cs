@@ -28,7 +28,6 @@ namespace JwtAuthDemo.Controllers
 
         private string GenerateJSONWebToken(int userId, string userRole)
         {
-            // Fetch key from config (optional, but better for real apps)
             var key = "mysuperdupersecretkey1234567890!@#$";
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
@@ -43,7 +42,7 @@ namespace JwtAuthDemo.Controllers
                 issuer: "mySystem",
                 audience: "myUsers",
                 claims: claims,
-                expires: DateTime.Now.AddMinutes(2), // short expiry for demo
+                expires: DateTime.Now.AddMinutes(2),// expiry in two minutes
                 signingCredentials: credentials);
 
             return new JwtSecurityTokenHandler().WriteToken(token);
