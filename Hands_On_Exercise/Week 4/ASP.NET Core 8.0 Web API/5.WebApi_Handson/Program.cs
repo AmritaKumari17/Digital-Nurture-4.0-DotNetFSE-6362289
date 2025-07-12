@@ -3,15 +3,10 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container
 builder.Services.AddControllers();
-
-// 🔧 Add Swagger services
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// 🔧 CORS Policy
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowLocalhost", policy =>
@@ -22,8 +17,7 @@ builder.Services.AddCors(options =>
     });
 });
 
-// 🔐 JWT Setup
-var key = "mysuperdupersecretkey1234567890!@#$"; // ✅ fixed: 32+ characters
+var key = "mysuperdupersecretkey1234567890!@#$"; 
 var symmetricSecurityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key));
 
 builder.Services.AddAuthentication(options =>
@@ -46,12 +40,9 @@ builder.Services.AddAuthentication(options =>
 });
 
 var app = builder.Build();
-
-// 🔧 Enable Swagger middleware
 app.UseSwagger();
 app.UseSwaggerUI();
 
-// Middleware pipeline
 app.UseHttpsRedirection();
 app.UseCors("AllowLocalhost");
 app.UseAuthentication();
